@@ -1,0 +1,72 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.elearningapp">
+
+    <!-- Common permissions for network and system access -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Queries for identifying specific apps (if needed for UPI) -->
+    <queries>
+        <package android:name="com.google.android.apps.nbu.paisa.user" /> <!-- Google Pay -->
+        <package android:name="com.phonepe.app" /> <!-- PhonePe -->
+        <package android:name="net.one97.paytm" /> <!-- Paytm -->
+        <!-- Add additional UPI apps as required -->
+    </queries>
+
+    <!-- Main application block -->
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="elearningapp"
+        android:theme="@style/LaunchTheme">
+
+        <!-- Main Activity definition -->
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@style/LaunchTheme"
+            android:windowSoftInputMode="adjustResize"
+            tools:ignore="Instantiatable"
+            android:enableOnBackInvokedCallback="true">
+            <!-- Main launcher intent -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- Deep linking and auto-verification -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="elearningapp.web.app" android:scheme="http" />
+                <data android:host="elearningapp.web.app" android:scheme="https" />
+            </intent-filter>
+
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="elearningapp.web.app" android:scheme="http" />
+                <data android:host="elearningapp.web.app" android:scheme="https" />
+            </intent-filter>
+        </activity>
+
+        <!-- Meta-data for Flutter -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+
+        <!-- Additional meta-data (optional) -->
+        <meta-data
+            android:name="flutter-deeplink"
+            android:value="true" />
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDZWSWa5kSdIu0342P4VKoY2HTsBg3SNlE"/>
+    </application>
+</manifest>
